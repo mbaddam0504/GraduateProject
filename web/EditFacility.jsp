@@ -50,7 +50,7 @@ and open the template in the editor.
                         Latitude
                     </td>
                     <td>
-                        <input type="text" name="latitude" value="${selectedFacilityDetails.latitude}" required  pattern="^[0-9]{1,3}(\.[0-9]{1,9})?$" title="Ex.12.3456">
+                        <input type="text" name="latitude" value="${selectedFacilityDetails.latitude}" required  pattern="^\-?[0-9]{1,3}(\.[0-9]{1,9})?$" title="Ex.12.3456">
                     </td>
                 </tr>
                 <tr>
@@ -58,7 +58,7 @@ and open the template in the editor.
                         Longitude
                     </td>
                     <td>
-                        <input type="text" name="longitude" value="${selectedFacilityDetails.longitude}" required pattern="^[0-9]{1,3}(\.[0-9]{1,9})?$" title="Ex.12.3456">
+                        <input type="text" name="longitude" value="${selectedFacilityDetails.longitude}" required pattern="^\-?[0-9]{1,3}(\.[0-9]{1,9})?$" title="Ex.12.3456">
                     </td>
                 </tr>
                  <tr>

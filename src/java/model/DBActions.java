@@ -20,9 +20,9 @@ import java.util.logging.Logger;
  * @author S519295
  */
 public class DBActions {
-    public final String URL = "jdbc:mysql://localhost/northfarm";
-    public final String USER = "root";
-    public final String PASSWORD = "";
+    public final static String URL = "jdbc:mysql://localhost/northfarm";
+    public final static String USER = "root";
+    public final static String PASSWORD = "";
     public static final String PATH="s519295";
     public static final String NAME="NorthwestFarmProjectTom";
     public void addNewFacility(Facility facilityObj){

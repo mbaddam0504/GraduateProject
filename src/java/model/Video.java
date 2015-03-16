@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
 
 /**
@@ -11,11 +10,21 @@ package model;
  * @author S519459
  */
 public class Video {
-   private int videoID;
-   private int enterpriseID;
-   private String videoName;
-   private String videoPath;
-   private String videoDesc;
+
+    private int videoID;
+    private int enterpriseID;
+    private String videoName;
+    private String videoPath;
+    private String videoDesc;
+
+    public Video() {
+    }
+
+    public Video(String VideoDesc, String VideoPath, String VideoName) {
+        this.videoDesc = VideoDesc;
+        this.videoPath = VideoPath;
+        this.videoName = VideoName;
+    }
 
     public int getVideoID() {
         return videoID;
@@ -57,9 +66,4 @@ public class Video {
         this.videoDesc = videoDesc;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return this.videoName.equals(((Video)o).videoName);
-    }
-   
 }

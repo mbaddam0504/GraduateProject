@@ -16,6 +16,15 @@ public class Image {
   private int imageID;
   private String imagePath;
   private String imageDesc;
+  
+  public Image(){
+  }
+  
+    public Image(String ImageDesc, String ImagePath, String ImageName) {
+        this.imageDesc = ImageDesc;
+        this.imagePath = ImagePath;
+        this.imageName = ImageName;
+    }
 
     public int getEnterpriseID() {
         return enterpriseID;
@@ -56,16 +65,5 @@ public class Image {
     public void setImageDesc(String imageDesc) {
         this.imageDesc = imageDesc;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if(this.imageName.equals(((Image)o).imageName)){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    
   
 }

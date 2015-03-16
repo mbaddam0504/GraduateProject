@@ -17,7 +17,16 @@ public class Enterprise {
     private String enterpriseIcon;
     private String enterpriseDescription;
     
-
+    public Enterprise(){
+    
+    }
+    
+   public Enterprise(String name, String description, String icon) {
+        this.enterpriseName = name;
+        this.enterpriseDescription = description;
+        this.enterpriseIcon = icon;
+    }
+    
     public int getEnterpriseID() {
         return enterpriseID;
     }
@@ -56,15 +65,6 @@ public class Enterprise {
 
     public void setEnterpriseDescription(String enterpriseDescription) {
         this.enterpriseDescription = enterpriseDescription;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if(this.enterpriseName.equals(((Enterprise)o).enterpriseName)){
-            return true;
-        }else{
-            return false;
-        }
     }
     
 }

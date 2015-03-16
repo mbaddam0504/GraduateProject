@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" lang="en"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <head>
+        <title>Directions</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="farmstyle.css"> </link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"></link>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+    </head>
+    <body>
+        <div class ="container">
+            <div class ="row">
+                <div class ="col-xs-12">
+                    <h:graphicImage value="/Images/nw.jpg" class="img-responsive" ></h:graphicImage>
+                </div>
+                <p class="parafont" id="breadcrumbs"><a href="index.xhtml"> Facility Home </a> &#187;<a href="index.xhtml"> Enterprise Home </a> &#187;  </p>
+                <div id="desc">
+                    <h2>Directions to R.T. Wright Farm</h2>
+                    <h:dataTable value="#{facilitiesManagedBean.getfacdirections()}" var="dir" style="margin-left: 10px;">
+                        <h:column>
+                            <li>#{dir}</li>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+
+            </div>
+        </div>
+        <br></br>
+        <br></br>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body" style="min-height: 225px; max-height: 225px;">
+                    <div id="col-left"><h3><a href="http://www.nwmissouri.edu/contact.htm">Contact Us</a></h3><p><b>Northwest Missouri State University</b><br />
+                            800 University Drive | Maryville, MO 64468<br />
+                            660.562.1212 | www.nwmissouri.edu</p><p>&#160;</p><p>© 2013 Northwest Missouri State University. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body" style="min-height: 225px; max-height: 225px;">
+                    <div id="col-center"><h3>Related Links</h3><ul><li><a href="http://www.nwmissouri.edu/aboutus/index.htm">About Northwest</a></li><li><a href="http://www.nwmissouri.edu/hr/index.htm">Employment</a></li><li><a href="http://www.nwmissouri.edu/admissions/campusvisits/maps.htm">Maps and Directions</a></li><li><a href="http://www.nwmissouri.edu/facts/consumerinfo.htm">Consumer Information</a></li><li><a href="http://www.nwmissouri.edu/alert/index.htm">Emergency Information</a></li><li><a href="http://www.nwmissouri.edu/aboutus/comment.htm">Comment Card</a></li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body" style="min-height: 225px; max-height: 225px;">
+                    <div id="col-right"><h3>Share This Page</h3><ul class="share"><li class="share-facebook"><a href="http://www.facebook.com/share.php?u=http://www.nwmissouri.edu/universityrelations/web/examples/1colno.htm" rel="nofollow" title="Share this page on Facebook">Share this page on Facebook</a></li><li class="share-twitter"><a href="http://twitter.com/share?text=From+the+%23Northwest+website&amp;via=NWMOState&amp;url=http://www.nwmissouri.edu/universityrelations/web/examples/1colno.htm" rel="nofollow" title="Share this page on Twitter">Share this page on Twitter</a></li><li class="share-email"><a href="mailto:?body=From%20the%20Northwest%20website%3A%0Ahttp://www.nwmissouri.edu/universityrelations/web/examples/1colno.htm&amp;subject=Northwest Missouri State University" rel="nofollow" title="Share this page by email">Share this page by email</a></li></ul></div><br class="clear" />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -21,9 +21,19 @@ private double latitude;
 private double longitude;
 private String directions;
 private ArrayList<Enterprise> enterprisesList;
+
 public Facility(){
     enterprisesList = new ArrayList<>();
 }
+
+  public Facility(String name, String description, float latitude, float longitude, String directions) {
+        this.facilityName = name;
+        this.facilityDescription = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.directions = directions;
+    }
+
     public int getFacilityID() {
         return facilityID;
     }
