@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <script src="imagePreview.js"></script>
+        <script src="radioButton.js"></script>
         <title>Add Media File</title>
         <link type="text/css" rel ="stylesheet" href="addmediafiles.css"> 
         <link type="text/css" rel ="stylesheet" href="project.css">
@@ -24,8 +25,8 @@
          <table>
              <br>
                     <tr>
-                        <td><input type="radio" id="inputradio" name="fileType" value="image" required>Image</td>
-                        <td><input type="radio" id="inputradio" name="fileType" value="video">Video</td>
+                        <td><input type="radio" id="inputradio" name="fileType" value="image" >Image</td>
+                        <td><input type="radio" id="inputradio" name="fileType" value="video" required>Video</td>
                     </tr>
                     <tr>
                         <td>
@@ -35,7 +36,7 @@
                        <!--   <input type="file" id="vimg" accept="image/*, video/*" name="fileAddress"/>  -->
                        <div class="choose_file">
                             <span >Choose File</span>
-                       <input type="file"  id="uploadImage" accept="image/*, video/*" name="fileAddress" onchange="previewImage()" required/>
+                            <input type="file"  id="uploadImage" name="fileAddress" accept="" onchange="previewImage()" required onclick="ImageOrVideo()"/>
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                        </div>
                              
