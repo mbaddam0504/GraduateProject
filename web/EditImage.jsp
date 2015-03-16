@@ -33,7 +33,7 @@
                         <td>
                             <div class="choose_file">
                             <span >Choose File</span>
-                            <input type="file" id="uploadImage" accept="image/*" name="fileAddress" onchange="previewImage()" required/>
+                            <input type="file" id="uploadImage" accept="image/*" name="fileAddress" onchange="previewImage()"/>
                             </div>
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         </td>
