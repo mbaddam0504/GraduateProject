@@ -16,6 +16,7 @@ public class Video {
     private String videoName;
     private String videoPath;
     private String videoDesc;
+    //private String videoType;
 
     public Video() {
     }
@@ -65,5 +66,13 @@ public class Video {
     public void setVideoDesc(String videoDesc) {
         this.videoDesc = videoDesc;
     }
+
+//    public String getVideoType() {
+//        return videoType;
+//    }
+//
+//    public void setVideoType(String videoType) {
+//        this.videoType = videoType;
+//    }
 
 }

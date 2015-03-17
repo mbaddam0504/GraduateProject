@@ -54,6 +54,7 @@ public class AddMediaFileServlet extends HttpServlet {
         String[] items = contentDisp.split(";");
         for (String s : items) {
             if (s.trim().startsWith("filename")) {
+                System.out.println(s.substring(s.indexOf("=") + 2, s.length() - 1));
                 return s.substring(s.indexOf("=") + 2, s.length() - 1);
             }
         }
@@ -138,6 +139,8 @@ response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=no");
 //                     testFileName.replace(' ', '*');
                 String mediaFileName = extractFileName(part).replace(' ', 'x');
                 System.out.println("mediafileName----" + mediaFileName);
+//                String mediaFileType = mediaFileName.substring(mediaFileName.lastIndexOf(".")+1);
+//                System.out.println("mediaFileType" + mediaFileType);
                 part.write("Users\\" + DBActions.PATH + "\\Documents\\NetBeansProjects\\" + DBActions.NAME + "\\web" + File.separator + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName);
                 String filePath = selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName;
                 Video video = new Video();
@@ -145,6 +148,7 @@ response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=no");
                 video.setVideoName(fileName);
                 video.setVideoPath(filePath);
                 video.setVideoDesc(fileDescription);
+//                video.setVideoType(mediaFileType);
                 ArrayList<String> videosListToCheck = (ArrayList<String>) session.getAttribute("videosList");
                 if (!videosListToCheck.contains(fileName)) {
                     dbActions.addVideoToEnterprise(selectedEnterprise.getEnterpriseID(), video);

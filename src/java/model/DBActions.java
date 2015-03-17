@@ -419,6 +419,7 @@ public class DBActions {
               video.setVideoName(resultSet.getString("VIDEONAME"));
               video.setVideoPath(resultSet.getString("VIDEOPATH"));
               video.setVideoDesc(resultSet.getString("VIDEO_DESC"));
+              //video.setVideoType(resultSet.getString("VIDEO_TYPE"));
           }
         } catch (SQLException ex) {
             Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
@@ -488,6 +489,7 @@ public class DBActions {
             pstmt.setString(2, video.getVideoName());
             pstmt.setString(3, video.getVideoPath());
             pstmt.setString(4, video.getVideoDesc());
+           // pstmt.setString(5, video.getVideoType());
             pstmt.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
@@ -641,12 +643,13 @@ public class DBActions {
           PreparedStatement pstmt = null;
         try {
             con = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
-            String query = "update VIDEO set VIDEONAME = ?, VIDEOPATH = ?, VIDEO_DESC = ? where VIDEO_ID = ? AND ENTERPRISE_ID = ?";
+            String query = "update VIDEO set VIDEONAME = ?, VIDEOPATH = ?, VIDEO_DESC = ?where VIDEO_ID = ? AND ENTERPRISE_ID = ?";
             
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, video.getVideoName());
             pstmt.setString(2, video.getVideoPath());
             pstmt.setString(3, video.getVideoDesc());
+            //pstmt.setString(4, video.getVideoType());
             pstmt.setInt(4, videoId);
             pstmt.setInt(5, enterpriseId);
             pstmt.executeUpdate();
