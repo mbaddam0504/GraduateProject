@@ -28,7 +28,7 @@ import model.Image;
  * @author S519295
  */
 @WebServlet(name = "EditImageServlet", urlPatterns = {"/EditImageServlet"})
-@MultipartConfig(location="C:/", fileSizeThreshold=1024*1024, 
+@MultipartConfig(location="", fileSizeThreshold=1024*1024, 
     maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 public class EditImageServlet extends HttpServlet {
 
@@ -104,16 +104,19 @@ public class EditImageServlet extends HttpServlet {
        //code for image part
          
                               Part part=request.getPart("fileAddress");
-                              String mediaFileName=extractFileName(part).replace(' ', 'x');
+                               String str = extractFileName(part).replace(' ', 'x');
+                    String str2 = str.replace("\\", ">");
+                    String[] strArr = str2.split(">");
+                    String mediaFileName = strArr[strArr.length-1];
                 System.out.println("fileName----"+ mediaFileName);
                  if(!mediaFileName.equals("")){
                      System.out.println("entered against");
-                     File fileSaveDir=new File("C:\\Users\\"+ DBActions.PATH +"\\Documents\\NetBeansProjects\\"+DBActions.NAME+"\\web" + File.separator + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID());
+                     File fileSaveDir=new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID()));
                 if(!fileSaveDir.exists()){
                     fileSaveDir.mkdir();
                 }
                      
-                part.write("Users\\"+ DBActions.PATH +"\\Documents\\NetBeansProjects\\"+DBActions.NAME+"\\web"+ File.separator + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName);
+                part.write(getServletContext().getRealPath("../../web/" +  selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName));
             String filePath =  selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName;
             image.setImagePath(filePath);
                  }

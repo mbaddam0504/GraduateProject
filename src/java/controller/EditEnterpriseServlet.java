@@ -26,7 +26,7 @@ import model.Facility;
  * @author S519295
  */
 @WebServlet(name = "EditEnterpriseServlet", urlPatterns = {"/EditEnterpriseServlet"})
-@MultipartConfig(location="C:/", fileSizeThreshold=1024*1024, 
+@MultipartConfig(location="", fileSizeThreshold=1024*1024, 
     maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 public class EditEnterpriseServlet extends HttpServlet {
 
@@ -98,17 +98,20 @@ public class EditEnterpriseServlet extends HttpServlet {
         
         //edited image code here.
          Part part=request.getPart("enterpriseIcon");
-                              String mediaFileName=extractFileName(part).replace(' ', 'x');
+                               String str = extractFileName(part).replace(' ', 'x');
+                    String str2 = str.replace("\\", ">");
+                    String[] strArr = str2.split(">");
+                    String mediaFileName = strArr[strArr.length-1];
                 System.out.println("fileName----"+ mediaFileName);
                 //checking whether the user needs to modify or not.
                 if(!mediaFileName.equals("")){
                      System.out.println("entered against");
-                     File fileSaveDir=new File("C:\\Users\\"+ DBActions.PATH +"\\Documents\\NetBeansProjects\\"+DBActions.NAME+"\\web" + File.separator + selectedFacility.getFacilityID());
+                     File fileSaveDir=new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID()));
                 if(!fileSaveDir.exists()){
                     fileSaveDir.mkdir();
                 }
                      
-                part.write("Users\\"+ DBActions.PATH +"\\Documents\\NetBeansProjects\\"+DBActions.NAME+"\\web"+ File.separator + selectedFacility.getFacilityID() + File.separator + mediaFileName);
+                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + mediaFileName));
             String filePath =  selectedFacility.getFacilityID() + File.separator + mediaFileName;
             enterprise.setEnterpriseIcon(filePath);
                  }

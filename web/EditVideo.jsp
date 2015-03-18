@@ -68,7 +68,7 @@
                 </table>
         </div>
         <div id="preview">
-            <video width="320" height="240" controls> <source type="video/mp4" src=${selectedVideo.videoPath}   /></video>
+            <video width="320" height="240" controls> <source type=${selectedVideoType} src=${selectedVideo.videoPath}   /></video>
 
         </div>
     </body>

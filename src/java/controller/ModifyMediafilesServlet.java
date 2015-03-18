@@ -64,6 +64,9 @@ public class ModifyMediafilesServlet extends HttpServlet {
                    System.out.println("entered into select video area");
                    Video selectedVideo = dbAction.getVideoDetails(selectedEnterpriseObject.getEnterpriseID(), fileName.substring(0, fileName.length()-7));
                    session.setAttribute("selectedVideo", selectedVideo);
+                   //video type
+                   session.setAttribute("selectedVideoType", String.format("video/%s",selectedVideo.getVideoPath().substring(selectedVideo.getVideoPath().lastIndexOf(".")+1)));
+                   System.out.println("selected video type....." + (String)session.getAttribute("selectedVideoType"));
                    RequestDispatcher rd = request.getRequestDispatcher("EditVideo.jsp");
                    rd.forward(request, response);
                }

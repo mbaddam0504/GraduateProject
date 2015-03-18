@@ -26,7 +26,7 @@ import model.Facility;
  * @author S519295
  */
 @WebServlet(name = "AddEnterpriseServlet", urlPatterns = {"/AddEnterpriseServlet"})
-@MultipartConfig(location = "C:/", fileSizeThreshold = 1024 * 1024 * 5 * 5 * 5 * 5,
+@MultipartConfig(location = "", fileSizeThreshold = 1024 * 1024 * 5 * 5 * 5 * 5,
         maxFileSize = 1024 * 1024 * 5 * 5, maxRequestSize = 1024 * 1024 * 5 * 5 * 5)
 public class AddEnterpriseServlet extends HttpServlet {
 
@@ -94,7 +94,7 @@ public class AddEnterpriseServlet extends HttpServlet {
             System.out.println("facility Id----" + facility.getFacilityID());
             //String saveOrCancel = request.getParameter("saveOrCancelEnterprise");
             if (facility.getFacilityName() != null) {
-                File fileSaveDir = new File("C:\\Users\\"+ DBActions.PATH +"\\Documents\\NetBeansProjects\\"+DBActions.NAME+"\\web" + File.separator + facility.getFacilityID());
+                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + facility.getFacilityID()));
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdir();
                 }
@@ -103,9 +103,12 @@ public class AddEnterpriseServlet extends HttpServlet {
                 String enterpriseDescription = request.getParameter("enterpriseDescription");
                 Part part = request.getPart("enterpriseIcon");
                 if (part != null) {
-                    String fileName = extractFileName(part).replace(' ', 'x');
+                    String str = extractFileName(part).replace(' ', 'x');
+                    String str2 = str.replace("\\", ">");
+                    String[] strArr = str2.split(">");
+                    String fileName = strArr[strArr.length-1];
                     System.out.println("fileName----" + fileName);
-                    part.write("Users\\"+ DBActions.PATH +"\\Documents\\NetBeansProjects\\"+DBActions.NAME+"\\web" + File.separator + facility.getFacilityID() + File.separator + fileName);
+                    part.write(getServletContext().getRealPath("../../web/"+ facility.getFacilityID() + "/" + fileName));
                     String filePath = facility.getFacilityID() + File.separator + fileName;
                     Enterprise newEnterprise = new Enterprise();
                     newEnterprise.setEnterpriseName(enterpriseName);

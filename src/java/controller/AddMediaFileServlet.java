@@ -29,7 +29,7 @@ import model.Video;
  * @author S519295
  */
 @WebServlet(name = "AddMediaFileServlet", urlPatterns = {"/AddMediaFileServlet"})
-@MultipartConfig(location = "C:/", fileSizeThreshold = 26246533,
+@MultipartConfig(location = "", fileSizeThreshold = 26246533,
         maxFileSize = 26246533, maxRequestSize = 26246533)
 public class AddMediaFileServlet extends HttpServlet {
 
@@ -104,15 +104,18 @@ public class AddMediaFileServlet extends HttpServlet {
             DBActions dbActions = new DBActions();
             session.setAttribute("mediafileChecker", "");
             if (fileType.equals("image")) {
-                File fileSaveDir = new File("C:\\Users\\" + DBActions.PATH + "\\Documents\\NetBeansProjects\\" + DBActions.NAME + "\\web" + File.separator + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID());
+                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID()));
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdir();
                 }
 //                     String testFileName = extractFileName(part);
 //                     testFileName.replace(' ', '*');
-                String mediaFileName = extractFileName(part).replace(' ', 'x');
-                System.out.println("mediafileName----" + mediaFileName);
-                part.write("Users\\" + DBActions.PATH + "\\Documents\\NetBeansProjects\\" + DBActions.NAME + "\\web" + File.separator + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName);
+                 String str = extractFileName(part).replace(' ', 'x');
+                    String str2 = str.replace("\\", ">");
+                    String[] strArr = str2.split(">");
+                    String mediaFileName = strArr[strArr.length-1];
+                System.out.println("mediafileName1----" + mediaFileName);
+                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName));
                 String filePath = selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName;
                 Image image = new Image();
                 image.setEnterpriseID(selectedEnterprise.getEnterpriseID());
@@ -131,17 +134,20 @@ response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=no");
                     response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=yes");
                 }
             } else {
-                File fileSaveDir = new File("C:\\Users\\" + DBActions.PATH + "\\Documents\\NetBeansProjects\\" + DBActions.NAME + "\\web" + File.separator + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID());
+                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID()));
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdir();
                 }
 //                     String testFileName = extractFileName(part);
 //                     testFileName.replace(' ', '*');
-                String mediaFileName = extractFileName(part).replace(' ', 'x');
+                 String str = extractFileName(part).replace(' ', 'x');
+                    String str2 = str.replace("\\", ">");
+                    String[] strArr = str2.split(">");
+                    String mediaFileName = strArr[strArr.length-1];
                 System.out.println("mediafileName----" + mediaFileName);
 //                String mediaFileType = mediaFileName.substring(mediaFileName.lastIndexOf(".")+1);
 //                System.out.println("mediaFileType" + mediaFileType);
-                part.write("Users\\" + DBActions.PATH + "\\Documents\\NetBeansProjects\\" + DBActions.NAME + "\\web" + File.separator + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName);
+                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName));
                 String filePath = selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName;
                 Video video = new Video();
                 video.setEnterpriseID(selectedEnterprise.getEnterpriseID());
