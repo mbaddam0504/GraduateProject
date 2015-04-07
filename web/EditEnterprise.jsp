@@ -45,9 +45,9 @@ and open the template in the editor.
                                                                 <input type="file" name="enterpriseIcon" accept="image/*" id="uploadImage" onchange="previewImage();"/>
                                                             </div>
                                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-
-                                                            <image src="${selectedEnterpriseDetails.enterpriseIcon}" alt="not available" style="width : 60px; height:40px;"/>
-                                                            <image id="uploadPreview" style="width : 60px; height:40px;" src=""/>
+ 
+                                                            <img src="${selectedEnterpriseDetails.enterpriseIcon}" style="width : 60px; height:40px;"/>
+                                                            <img id="uploadPreview" style="width : 60px; height:40px;" src=""/>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -94,7 +94,7 @@ and open the template in the editor.
 
                                                                                             <input type="submit" value="Edit MediaFile" id="editmediafilebutton" name="modifyMediafiles" ${mediafileChecker}>
                                                                                                 <br>
-                                                                                                    <input type="submit" value="Delete MediaFile" name="modifyMediafiles" id="deletemediafilebuttonbutton" onclick="return confirm('Are you sure?');" ${mediafileChecker}>
+                                                                                                    <input type="submit" value="Delete MediaFile" name="modifyMediafiles" id="deletemediafilebuttonbutton" onclick="return confirm('Are you sure you want to Delete?');" ${mediafileChecker}>
 
 
                                                                                                         </form>

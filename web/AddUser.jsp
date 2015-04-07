@@ -1,5 +1,6 @@
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -60,14 +61,11 @@
                     
                     <tr>
                           <div id="error">     
- <% if(request.getAttribute("pwdcomb") != null)
-{
-out.println(request.getAttribute("pwdcomb"));
-}
-else{
-out.println("");
-}
-%>  
+<c:choose>
+    <c:when test="${pwdcomb != null}"><c:out value="${pwdcomb}"/></c:when>
+    <c:otherwise> <c:out value=""/> </c:otherwise>
+</c:choose>
+                          </div>
                     </tr>
                     
                     <tr>

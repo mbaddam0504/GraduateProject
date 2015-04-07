@@ -23,8 +23,8 @@ public class DBActions {
     public final static String URL = "jdbc:mysql://localhost/northfarm";
     public final static String USER = "root";
     public final static String PASSWORD = "";
-    public static final String PATH="s519295";
-    public static final String NAME="NorthwestFarmProjectTom";
+//    public static final String PATH="s519295";
+//    public static final String NAME="NorthwestFarmProjectTom";
     public void addNewFacility(Facility facilityObj){
         
         try {
@@ -705,6 +705,87 @@ public class DBActions {
                 Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+     public int getFacilityId(String facilityName){
+        int facilityId=0;
+           try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          Connection  con = null;
+          PreparedStatement pstmt = null;
+        try {
+            con = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
+                String query = "select FACILITY_ID from FACILITY where FACILITY_NAME = ?";
+           pstmt = con.prepareStatement(query);
+         pstmt.setString(1, facilityName);
+          ResultSet resultSet = pstmt.executeQuery();
+          while(resultSet.next()){
+             facilityId = resultSet.getInt(1);
+          }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            try {
+                try {
+                    pstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return facilityId;
+    }
+    public int getEnterpriseId(int facilityId, String enterpriseName){
+        int enterpriseId=0;
+           try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+          Connection  con = null;
+          PreparedStatement pstmt = null;
+        try {
+            con = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
+                String query = "select ENTERPRISE_ID from ENTERPRISE where FACILITY_ID = ? AND ENTERPRISE_NAME = ?";
+           pstmt = con.prepareStatement(query);
+          pstmt.setInt(1, facilityId);
+          pstmt.setString(2, enterpriseName);
+          ResultSet resultSet = pstmt.executeQuery();
+          while(resultSet.next()){
+             enterpriseId = resultSet.getInt(1);
+          }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            try {
+                try {
+                    pstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                con.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(DBActions.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return enterpriseId;
     }
     public void deleteEnterprise(int facilityId, String enterpriseName){
            try {

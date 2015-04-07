@@ -110,13 +110,13 @@ public class EditVideoServlet extends HttpServlet {
                 System.out.println("fileName----"+ mediaFileName);
                  if(!mediaFileName.equals("")){
                      System.out.println("entered against");
-                     File fileSaveDir=new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID()));
+                     File fileSaveDir=new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID()));
                 if(!fileSaveDir.exists()){
                     fileSaveDir.mkdir();
                 }
                      
-                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName));
-            String filePath =  selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName;
+                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName));
+            String filePath =  selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName;
             video.setVideoPath(filePath);
                  }
                  //validation code

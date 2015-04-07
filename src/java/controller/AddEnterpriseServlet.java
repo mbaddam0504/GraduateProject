@@ -109,7 +109,7 @@ public class AddEnterpriseServlet extends HttpServlet {
                     String fileName = strArr[strArr.length-1];
                     System.out.println("fileName----" + fileName);
                     part.write(getServletContext().getRealPath("../../web/"+ facility.getFacilityID() + "/" + fileName));
-                    String filePath = facility.getFacilityID() + File.separator + fileName;
+                    String filePath = facility.getFacilityID() + "/" + fileName;
                     Enterprise newEnterprise = new Enterprise();
                     newEnterprise.setEnterpriseName(enterpriseName);
                     newEnterprise.setEnterpriseIcon(filePath);

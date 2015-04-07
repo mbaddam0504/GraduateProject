@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.DBActions;
+import model.DeleteDirectories;
 import model.Enterprise;
 import model.Facility;
 
@@ -103,13 +105,21 @@ public class AddOrEditOrDeleteEnterpriseServlet extends HttpServlet {
            session.setAttribute("videosList", videosList);
            session.setAttribute("mediafileChecker", (imagesList.isEmpty() && videosList.isEmpty()) ? "disabled" : "");
            //need to know the facility and enterprise to which we do changes.
-           
+            //printing selected enterprise details
+       Enterprise printEnt = (Enterprise)session.getAttribute("selectedEnterpriseDetails");
+                   System.out.println(String.format("Name:%s, Desc: %s, Icon:%s", printEnt.getEnterpriseName(), printEnt.getEnterpriseDescription(), printEnt.getEnterpriseIcon()));
+       
            RequestDispatcher rd = request.getRequestDispatcher("EditEnterprise.jsp");
            rd.forward(request, response);
        }else{
            //code to delete selected enterprise. So, we need to know the facility to which the selected enterprise belongs to.
            DBActions dbActions = new DBActions();
+           int enterId = dbActions.getEnterpriseId(facilityId, selectedEnterprise);
            dbActions.deleteEnterprise(facilityId, selectedEnterprise);
+           //delete enterprise code
+            File fileDelDir = new File(getServletContext().getRealPath("../../web/" + facilityId + "/" + enterId));
+                DeleteDirectories.deleteDirectory(fileDelDir);
+           
            session.setAttribute("selectedFacilityDetails", dbActions.getFacilityDetails(facilityId));
            session.setAttribute("enterpriseChecker", dbActions.getFacilityDetails(facilityId).getEnterprisesList().isEmpty()?"disabled":"");
            RequestDispatcher rd = request.getRequestDispatcher("EditFacility.jsp");

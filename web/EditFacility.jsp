@@ -90,7 +90,7 @@ and open the template in the editor.
           
                  <input type="submit" value="Edit Enterprise" id="enterpriseSideButton" name="addOrEditOrDeleteEnterprise" ${enterpriseChecker}>
            
-                <input type="submit" value="Delete Enterprise" id="deleteenterpriseSideButton" name="addOrEditOrDeleteEnterprise" onclick="return confirm('Are you sure?');" ${enterpriseChecker}>
+                <input type="submit" value="Delete Enterprise" id="deleteenterpriseSideButton" name="addOrEditOrDeleteEnterprise" onclick="return confirm('Are you sure you want to Delete?');" ${enterpriseChecker}>
            
              </div>
                   

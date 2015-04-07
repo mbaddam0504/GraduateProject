@@ -104,7 +104,7 @@ public class AddMediaFileServlet extends HttpServlet {
             DBActions dbActions = new DBActions();
             session.setAttribute("mediafileChecker", "");
             if (fileType.equals("image")) {
-                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID()));
+                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID()));
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdir();
                 }
@@ -115,8 +115,8 @@ public class AddMediaFileServlet extends HttpServlet {
                     String[] strArr = str2.split(">");
                     String mediaFileName = strArr[strArr.length-1];
                 System.out.println("mediafileName1----" + mediaFileName);
-                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName));
-                String filePath = selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName;
+                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName));
+                String filePath = selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName;
                 Image image = new Image();
                 image.setEnterpriseID(selectedEnterprise.getEnterpriseID());
                 image.setImageName(fileName);
@@ -134,7 +134,7 @@ response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=no");
                     response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=yes");
                 }
             } else {
-                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID()));
+                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID()));
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdir();
                 }
@@ -147,8 +147,8 @@ response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=no");
                 System.out.println("mediafileName----" + mediaFileName);
 //                String mediaFileType = mediaFileName.substring(mediaFileName.lastIndexOf(".")+1);
 //                System.out.println("mediaFileType" + mediaFileType);
-                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName));
-                String filePath = selectedFacility.getFacilityID() + File.separator + selectedEnterprise.getEnterpriseID() + File.separator + mediaFileName;
+                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName));
+                String filePath = selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName;
                 Video video = new Video();
                 video.setEnterpriseID(selectedEnterprise.getEnterpriseID());
                 video.setVideoName(fileName);

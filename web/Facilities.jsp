@@ -39,7 +39,7 @@ and open the template in the editor.
             <input type="submit" value="Edit Facility" id="editfacilitybutton" name="editOrDeleteFacility" ${facilityChecker}/>
             
             
-                <input type="submit" value="Delete Facility" id="deletefacilitybutton" onclick="return confirm('Are you sure?');" name ="editOrDeleteFacility"  ${facilityChecker}/>
+                <input type="submit" value="Delete Facility" id="deletefacilitybutton" onclick="return confirm('Are you sure you want to Delete?');" name ="editOrDeleteFacility"  ${facilityChecker}/>
             
          </div> 
             

@@ -111,8 +111,8 @@ public class EditEnterpriseServlet extends HttpServlet {
                     fileSaveDir.mkdir();
                 }
                      
-                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + File.separator + mediaFileName));
-            String filePath =  selectedFacility.getFacilityID() + File.separator + mediaFileName;
+                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + mediaFileName));
+            String filePath =  selectedFacility.getFacilityID() + "/" + mediaFileName;
             enterprise.setEnterpriseIcon(filePath);
                  }
                 
@@ -124,6 +124,9 @@ public class EditEnterpriseServlet extends HttpServlet {
                dbActions.updateEnterpriseDetails(selectedEnterprise.getEnterpriseID(), enterprise);
                session.setAttribute("selectedFacilityDetails", dbActions.getFacilityDetails(selectedFacility.getFacilityID()));
        session.setAttribute("selectedEnterpriseDetails", dbActions.getEnterpriseDetails(selectedFacility.getFacilityID(), enterpriseName));
+       //printing selected enterprise details
+       Enterprise printEnt = (Enterprise)session.getAttribute("selectedEnterpriseDetails");
+                   System.out.println(String.format("Name:%s, Desc: %s, Icon:%s", printEnt.getEnterpriseName(), printEnt.getEnterpriseDescription(), printEnt.getEnterpriseIcon()));
        
        //redirecting to another web page.
       response.sendRedirect("ExtraEditEnterpriseServlet?isEnterpriseDuplicated=no");

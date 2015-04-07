@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.DBActions;
+import model.DeleteDirectories;
 import model.Facility;
 
 /**
@@ -60,6 +62,11 @@ public class EditOrDeleteFacilityServlet extends HttpServlet {
        }else{
            System.out.println("clicked on delete facility " + selectedFacility);
            dbActions.deleteFacility(selectedFacility);
+           int facId = dbActions.getFacilityId(selectedFacility);
+           //delete facility code
+            File fileDelDir = new File(getServletContext().getRealPath("../../web/" + facId));
+                DeleteDirectories.deleteDirectory(fileDelDir);
+           
             ArrayList<String> facilitiesList = dbActions.getFacilitiesList(); 
         session.setAttribute("facilitiesList", facilitiesList);
         session.setAttribute("facilityChecker", facilitiesList.isEmpty()?"disabled":"");
