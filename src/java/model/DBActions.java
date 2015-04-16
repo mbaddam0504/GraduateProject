@@ -285,6 +285,7 @@ public class DBActions {
                     enterprise.setFacilityID(resultSet.getInt("FACILITY_ID"));
                     enterprise.setEnterpriseName(resultSet.getString("ENTERPRISE_NAME"));
                     enterprise.setEnterpriseIcon(resultSet.getString("ENTERPRISE_ICON"));
+                    System.out.println("enterprise icon testing................" + enterprise.getEnterpriseIcon());
                     enterprise.setEnterpriseDescription(resultSet.getString("ENTERPRISE_DESC"));
                     
                     

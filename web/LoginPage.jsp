@@ -37,16 +37,17 @@
                     </tr>
                 </table>
             <br><br><br><br><br><br><br><br><br><br><br>
-                          <div id="error">     
-<c:choose>
-    <c:when test="${message12 != null}">
-        <c:out value="jj"></c:out>
-    </c:when>
-    <c:otherwise> <c:out value="jjjhgg"/> </c:otherwise>
-</c:choose>
-    <br>
-                          </div> 
-             
+            <div id="error">     
+ <% if(request.getAttribute("message12") != null)
+{
+out.println(request.getAttribute("message12"));
+}
+else{
+out.println("");
+}
+%>
+<br>
+</div> 
              
               
               <input type="submit" value ="Log In" id="addButton">

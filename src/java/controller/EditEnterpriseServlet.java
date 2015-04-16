@@ -89,7 +89,7 @@ public class EditEnterpriseServlet extends HttpServlet {
         HttpSession session = request.getSession();
        Facility selectedFacility = (Facility)session.getAttribute("selectedFacilityDetails");
        Enterprise selectedEnterprise = (Enterprise)session.getAttribute("selectedEnterpriseDetails");
-        String enterpriseName = request.getParameter("enterpriseName");
+        String enterpriseName = request.getParameter("enterpriseName").trim();
         String enterpriseDescription = request.getParameter("enterpriseDescription");
         Enterprise enterprise = new Enterprise();
         enterprise.setEnterpriseName(enterpriseName);

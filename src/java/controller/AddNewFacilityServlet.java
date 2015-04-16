@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class AddNewFacilityServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String facilityName = request.getParameter("facilityName");
+        String facilityName = request.getParameter("facilityName").trim();
         System.out.println(" facility name is "+facilityName);
         String facilityDescription = request.getParameter("facilityDescription");
         double latitude = Double.parseDouble(request.getParameter("latitude"));
@@ -56,9 +57,15 @@ public class AddNewFacilityServlet extends HttpServlet {
         if(!facilitiesListToCheck.contains(facilityName)){
         
         dbActions.addNewFacility(facility);
+        //creating directory for created facility
+        File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + dbActions.getFacilityId(facilityName)));
+                if (!fileSaveDir.exists()) {
+                    fileSaveDir.mkdir();
+                }
         ArrayList<String> facilitiesList = dbActions.getFacilitiesList(); 
         session.setAttribute("facilitiesList", facilitiesList);
          session.setAttribute("facilityChecker", facilitiesList.isEmpty()?"disabled":"");
+         
         RequestDispatcher rd = request.getRequestDispatcher("Facilities.jsp");
          rd.forward(request, response);
         }else{

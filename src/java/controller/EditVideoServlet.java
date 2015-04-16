@@ -93,7 +93,7 @@ public class EditVideoServlet extends HttpServlet {
         Enterprise selectedEnterprise = (Enterprise)session.getAttribute("selectedEnterpriseDetails");
         Video selectedVideo = (Video)session.getAttribute("selectedVideo");
         DBActions dbActions = new DBActions();
-       String videoName = request.getParameter("videoName");
+       String videoName = request.getParameter("videoName").trim();
        String videoDescription = request.getParameter("videoDescription");
        Video video = new Video();
        video.setEnterpriseID(selectedEnterprise.getEnterpriseID());

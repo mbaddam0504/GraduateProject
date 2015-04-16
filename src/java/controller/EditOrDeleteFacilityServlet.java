@@ -61,8 +61,9 @@ public class EditOrDeleteFacilityServlet extends HttpServlet {
            rd = request.getRequestDispatcher("EditFacility.jsp");
        }else{
            System.out.println("clicked on delete facility " + selectedFacility);
-           dbActions.deleteFacility(selectedFacility);
            int facId = dbActions.getFacilityId(selectedFacility);
+           dbActions.deleteFacility(selectedFacility);
+           
            //delete facility code
             File fileDelDir = new File(getServletContext().getRealPath("../../web/" + facId));
                 DeleteDirectories.deleteDirectory(fileDelDir);

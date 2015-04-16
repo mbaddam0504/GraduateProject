@@ -92,7 +92,7 @@ public class AddMediaFileServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         String fileType = request.getParameter("fileType");
-        String fileName = request.getParameter("fileName");
+        String fileName = request.getParameter("fileName").trim();
         String fileDescription = request.getParameter("fileDescription");
 
         Facility selectedFacility = (Facility) session.getAttribute("selectedFacilityDetails");
@@ -104,10 +104,10 @@ public class AddMediaFileServlet extends HttpServlet {
             DBActions dbActions = new DBActions();
             session.setAttribute("mediafileChecker", "");
             if (fileType.equals("image")) {
-                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID()));
-                if (!fileSaveDir.exists()) {
-                    fileSaveDir.mkdir();
-                }
+//                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID()));
+//                if (!fileSaveDir.exists()) {
+//                    fileSaveDir.mkdir();
+//                }
 //                     String testFileName = extractFileName(part);
 //                     testFileName.replace(' ', '*');
                  String str = extractFileName(part).replace(' ', 'x');

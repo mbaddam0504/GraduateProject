@@ -13,14 +13,15 @@ function ImageOrVideo(){
     }else if(imageOrVideo[1].checked){
         document.getElementById("uploadImage").setAttribute("accept", "video/*");
        // alert("video selected");
-    }else{
-        confirm("select image or video");
-        document.getElementById("uploadImage").blur();
-        document.getElementById("inputradio").focus();
-        
-       // document.getElementById("uploadImage").disabled=true;
-        
-       // document.getElementById("uploadImage").disabled=false;
-        
+//    }else{
+//        confirm("select image or video");
+//        document.getElementById("uploadImage").blur();
+//        document.getElementById("inputradio").focus();
+//        
+//       // document.getElementById("uploadImage").disabled=true;
+//        
+//       // document.getElementById("uploadImage").disabled=false;
+//        
+//    }
     }
 }

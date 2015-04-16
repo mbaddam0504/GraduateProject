@@ -93,7 +93,7 @@ public class EditImageServlet extends HttpServlet {
         Enterprise selectedEnterprise = (Enterprise)session.getAttribute("selectedEnterpriseDetails");
         Image selectedImage = (Image)session.getAttribute("selectedImage");
         DBActions dbActions = new DBActions();
-       String imageName = request.getParameter("imageName");
+       String imageName = request.getParameter("imageName").trim();
        String imageDescription = request.getParameter("imageDescription");
        Image image = new Image(); 
        image.setEnterpriseID(selectedEnterprise.getEnterpriseID());

@@ -61,10 +61,14 @@
                     
                     <tr>
                           <div id="error">     
-<c:choose>
-    <c:when test="${pwdcomb != null}"><c:out value="${pwdcomb}"/></c:when>
-    <c:otherwise> <c:out value=""/> </c:otherwise>
-</c:choose>
+ <% if(request.getAttribute("pwdcomb") != null)
+{
+out.println(request.getAttribute("pwdcomb"));
+}
+else{
+out.println("");
+}
+%>  
                           </div>
                     </tr>
                     

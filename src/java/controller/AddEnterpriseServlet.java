@@ -88,18 +88,19 @@ public class AddEnterpriseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+         DBActions dbActions = new DBActions();
             HttpSession session = request.getSession();
             Facility facility = (Facility) session.getAttribute("selectedFacilityDetails");
             System.out.println("facility Id----" + facility.getFacilityID());
             //String saveOrCancel = request.getParameter("saveOrCancelEnterprise");
             if (facility.getFacilityName() != null) {
-                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + facility.getFacilityID()));
-                if (!fileSaveDir.exists()) {
-                    fileSaveDir.mkdir();
-                }
-
-                String enterpriseName = request.getParameter("enterpriseName");
+//                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + facility.getFacilityID()));
+//                if (!fileSaveDir.exists()) {
+//                    fileSaveDir.mkdir();
+//                }
+String enterpriseName = request.getParameter("enterpriseName").trim();
+                
+                
                 String enterpriseDescription = request.getParameter("enterpriseDescription");
                 Part part = request.getPart("enterpriseIcon");
                 if (part != null) {
@@ -123,10 +124,14 @@ public class AddEnterpriseServlet extends HttpServlet {
                         }
                     }
 
-                    DBActions dbActions = new DBActions();
+                   
                     if (z == 0) {
                         dbActions.addNewEnterprise(newEnterprise);
-
+//create directory to store mediafiles of enterprise
+                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + facility.getFacilityID() + "/" + dbActions.getEnterpriseId(facility.getFacilityID(), enterpriseName)));
+                if (!fileSaveDir.exists()) {
+                    fileSaveDir.mkdir();
+                }
                         session.setAttribute("selectedFacilityDetails", dbActions.getFacilityDetails(facility.getFacilityID()));
                         session.setAttribute("enterpriseChecker", dbActions.getFacilityDetails(facility.getFacilityID()).getEnterprisesList().isEmpty() ? "disabled" : "");
                         response.sendRedirect("ExtraEnterpriseServlet?isEnterpriseDuplicated=no");

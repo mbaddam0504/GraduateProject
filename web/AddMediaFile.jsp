@@ -36,7 +36,7 @@
                        <!--   <input type="file" id="vimg" accept="image/*, video/*" name="fileAddress"/>  -->
                        <div class="choose_file">
                             <span >Choose File</span>
-                            <input type="file"  id="uploadImage" name="fileAddress" accept="" onchange="previewImage()" required onclick="ImageOrVideo()"/>
+                            <input type="file"  id="uploadImage" name="fileAddress" accept="image/*" onchange="previewImage()" required onclick="ImageOrVideo()"/>
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                        </div>
                              

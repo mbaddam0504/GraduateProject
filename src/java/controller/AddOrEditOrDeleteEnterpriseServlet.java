@@ -43,7 +43,7 @@ public class AddOrEditOrDeleteEnterpriseServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       String facilityName = request.getParameter("facilityName");
+       String facilityName = request.getParameter("facilityName").trim();
        String facilityDiscription = request.getParameter("facilityDescription");
        double latitude = Double.parseDouble(request.getParameter("latitude"));
        double longitude = Double.parseDouble(request.getParameter("longitude"));
