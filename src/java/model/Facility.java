@@ -21,7 +21,9 @@ private double latitude;
 private double longitude;
 private String directions;
 private ArrayList<Enterprise> enterprisesList;
-
+ public Facility(String name){
+      this.facilityName = name;
+  }
 public Facility(){
     enterprisesList = new ArrayList<>();
 }

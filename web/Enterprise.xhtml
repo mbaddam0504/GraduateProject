@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html" 
       lang="en"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Enterprise</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -34,8 +35,8 @@
             });
 
         </script>
-        
-         <script type="text/javascript">
+
+        <script type="text/javascript">
 
             function hideVideoDiv() {
 //    $('imgDiv').show();
@@ -58,7 +59,7 @@
                     <h:graphicImage value="/Images/nw.jpg" class="img-responsive" ></h:graphicImage>
                 </div>
                 <!--<br class="visible-md visible-lg hidden-xs">&#160;</br>-->
-                <p class="hidden-xs" id="breadcrumbs"><a href="index.xhtml"> Facility Home </a> &#187;<a href="index.xhtml"> Enterprise Home </a> &#187;  </p>
+                <p class="hidden-xs" id="breadcrumbs"><a href="index.xhtml"> Facility Home </a> &#187;<a href="enterpriseHome.xhtml"> Enterprise Home </a> &#187;<a href="Enterprise.xhtml"> Enterprise</a> &#187;  </p>
                 <br class="visible-xs">&#160;</br>
                 <div id="desc">
                     <h2 class="visible-lg">#{facilitiesManagedBean.enterpriseName}</h2>
@@ -80,7 +81,7 @@
                     </button>
                     <button id="video" value="Video"  style="width:35%; height: 3%; font-size: 17px; font-weight: bold; " onclick="hideImageDiv()">  Videos          
                     </button>
-                    </div>
+                </div>
                 <div id="EnterpriseVideoSlideShow" style = "display: none;">
                     <!--width: 820px; height: 520px;-->
                     <div id="myCarousel" class="carousel slide container" data-ride="carousel" style="width: 70%; height: 60%; margin: 0 auto; ">
@@ -97,33 +98,37 @@
 
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <video type="video/mp4" width="800px" height="500px" controls="controls">
-                                        <source src="Videos\Undercover Dairy Farm Video.mp4" alt="Flower"></source>
-                                      </video>
-                            </div>
-<!--                            <ui:repeat value="#{facilitiesManagedBean.imageDetails}" var="image">  
-                                <div class="item">
-                                    <img src="#{image.imagePath}" width="800px" height="500px"  alt="#{image.imageName}"></img>
-                                </div>
-                            </ui:repeat>-->
-                                <div class="item">
-                                  <video type="video/mp4" width="800px" height="500px" controls="controls">
-                                        <source src="Videos\Dairy Farm Tour - Milking Parlor.mp4" alt="Flower"></source>
-                                      </video>
-                                </div>
                             
-                                <div class="item">
-                                  <video type="video/mp4" width="800px" height="500px" controls="controls">
-                                        <source src="Videos\Dairy Farm Tour.mp4" alt="Flower"></source>
-                                      </video>
+                                <div class="item active">
+                                    <video type="video/mp4" width="520px" height="500px" style="margin-left: 65px; margin-right: 50px;" controls="controls">
+                                        <source src="#{facilitiesManagedBean.firstVideoPath}" alt="#{facilitiesManagedBean.firstVideoName}"></source>
+                                    </video>
                                 </div>
-                            
+                           
+                            <ui:repeat value="#{facilitiesManagedBean.videoDetails}" var="videos">  
                                 <div class="item">
-                                    <video type="video/mp4" width="800px" height="500px" controls="controls">
-                                        <source src="Videos\Undercover Dairy Farm Video.mp4" alt="Flower"></source>
-                                      </video>
+                                    <video type="video/mp4" width="520px" height="500px" style="margin-left: 65px; margin-right: 50px;" controls="controls">
+                                        <source src="#{videos.videoPath}" alt="#{videos.videoName}"></source>
+                                    </video>
                                 </div>
+                            </ui:repeat>
+                            <!--                                                            <div class="item">
+                                                                                          <video type="video/mp4" width="800px" height="500px" controls="controls">
+                                                                                                <source src="Videos\Dairy Farm Tour - Milking Parlor.mp4" alt="Flower"></source>
+                                                                                              </video>
+                                                                                        </div>
+                                                                                    
+                                                                                        <div class="item">
+                                                                                          <video type="video/mp4" width="800px" height="500px" controls="controls">
+                                                                                                <source src="Videos\Dairy Farm Tour.mp4" alt="Flower"></source>
+                                                                                              </video>
+                                                                                        </div>
+                                                                                    
+                                                                                        <div class="item">
+                                                                                            <video type="video/mp4" width="800px" height="500px" controls="controls">
+                                                                                                <source src="Videos\Undercover Dairy Farm Video.mp4" alt="Flower"></source>
+                                                                                              </video>
+                                                                                        </div>-->
                         </div>
 
                         <!-- Left and right controls -->
@@ -152,14 +157,22 @@
 
                         <!-- Wrapper for slides -->
                         <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img src="C:\NorthFarm\Images\Dairy4.jpg" width="800px" height="500px"  alt="Dairy4"></img>
-                            </div>
+                            <!--<c:if>-->
+
+                            
+                                <div class="item active">
+                                    <img src="#{facilitiesManagedBean.firstImagePath}" width="800px" height="500px"  alt="#{facilitiesManagedBean.firstImageName}"></img>
+                                </div>
+                            
+                            <!--</c:if>-->
+                            <!--<c:otherwise>-->
                             <ui:repeat value="#{facilitiesManagedBean.imageDetails}" var="image">  
                                 <div class="item">
                                     <h:graphicImage url="#{image.imagePath}" width="800px" height="500px"  alt="#{image.imageName}"></h:graphicImage>
                                 </div>
                             </ui:repeat>
+                            <!--</c:otherwise>-->
+
                             <!--    <div class="item">
                                   <img src="C:\NorthFarm\Images\Dairy2.jpg" width="800px" height="500px" alt="Chania"></img>
                                 </div>
@@ -191,7 +204,7 @@
         <br></br>
         <br></br>
 
-         <div class="col-lg-4 visible-lg">
+        <div class="col-lg-4 visible-lg">
             <div class="panel panel-default" style="margin-left: 23%; width:75%;">
                 <div class="panel-body" style="min-height: 225px; max-height: 225px; ">
                     <div id="col-left">

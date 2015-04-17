@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author S519295
  */
 public class DBActions {
-    public final static String URL = "jdbc:mysql://localhost/northfarm";
+    public final static String URL = "jdbc:mysql://localhost:3306/northfarm";
     public final static String USER = "root";
     public final static String PASSWORD = "";
 //    public static final String PATH="s519295";

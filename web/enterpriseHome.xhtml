@@ -2,25 +2,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core" lang="en"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:f="http://xmlns.jcp.org/jsf/core" lang="en">
     <h:head>
         <title>Enterprise Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" type="text/css" href="farmstyle.css"> </link>
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
 
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"></link>
 
+        <script type="text/javascript" src="farmscript.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script src="jquery.expander.js"></script>
+
         <script>
             $(document).ready(function () {
+                
+
+//document.getElementById('abc').value=""+document.cookie;
+//alert(document.getElementById('abc').value)e;
+//                document.getElementById('hideForm:hideBtn').click();
+
+//document.getElementById("fname").value = "" + document.cookie;
+
+
 
                 $('div.expandDiv').expander({
                     slicePoint: 100, //It is the number of characters at which the contents will be sliced into two parts.
@@ -33,46 +44,45 @@
             });
 
         </script>
+
     </h:head>
-    <h:body class="farmbody img-responsive" style="background-color: #006747; background-size: 100%;">
+    <h:body   class="farmbody img-responsive" style="background-color: #006747; background-size: 100%;">
+
         <div class ="container">
             <div class ="row">
                 <div class ="col-xs-12">
                     <h:graphicImage value="/Images/nw.jpg" class="img-responsive" ></h:graphicImage>
                 </div>                                   
-                <!--<br class="visible-md visible-lg hidden-xs">&#160;</br>-->
-                <p class="hidden-xs" id="breadcrumbs"><a href="index.xhtml"> Facility Home </a> &#187;<a href="index.xhtml"> Enterprise Home </a> &#187;  </p>
+                <p class="hiddenData" id="hiddenData"></p>
+                <p class="hidden-xs" id="breadcrumbs"><a href="index.xhtml"> Facility Home </a> &#187;<a href="enterpriseHome.xhtml"> Enterprise Home </a> &#187;  </p>
                 <br class="visible-xs">&#160;</br>
+
+
+               
+
                 <div id="desc">
                     <a href="directions.xhtml" style="float: right; text-decoration: none; color: red; font-weight: bold">Directions</a>
-                    <h2 class="visible-lg">R T</h2>
-                    <h2 class="visible-md">R T</h2>
-                    <h3 class="visible-sm">R T</h3>
-                    <h4 class="visible-xs">R T</h4>
-                    
-                    <!--<h2>R.T. Wright Farm</h2>-->
+                    <h2 class="visible-lg">#{facilitiesManagedBean.facilityName}</h2>
+                    <h2 class="visible-md">#{facilitiesManagedBean.facilityName}</h2>
+                    <h3 class="visible-sm">#{facilitiesManagedBean.facilityName}</h3>
+                    <h4 class="visible-xs">#{facilitiesManagedBean.facilityName}</h4>
                     <div class="expandDiv visible-xs">
                         <p>
-                            Commonly called the North Farm, this 448-acre facility employs a farm manager, animal technician, crop technician, swine herdsman and University students. The beef herd is composed of Gelbvieh, Angus and Charolais cattle. Suffolk ewes bred with Dorsett rams produce market lambs which are used in meats class. A farrow-to-finish swine operation gives students an opportunity to explore changes in the pork industry.
+                            #{facilitiesManagedBean.facDesc}
                         </p>
                     </div>
                     <p class="hidden-xs">
-                        Commonly called the North Farm, this 448-acre facility employs a farm manager, animal technician, crop technician, swine herdsman and University students. The beef herd is composed of Gelbvieh, Angus and Charolais cattle. Suffolk ewes bred with Dorsett rams produce market lambs which are used in meats class. A farrow-to-finish swine operation gives students an opportunity to explore changes in the pork industry.
+                        #{facilitiesManagedBean.facDesc}
                     </p>
                 </div>
-                
-                
+
                 <div id="Elist">
                     <h:dataTable value="#{facilitiesManagedBean.enterpriseDetails}" var="enterprise" >
                         <h:column>
                             <div class="icon">
                                 <h:outputLink value="Enterprise.xhtml">
-                                    <!--<img src="C:\Users\s519351\Desktop\dairy_farm_icon.jpg" height="80" width="80"></img>-->
-<!--                                    <h:graphicImage value="#{enterprise.enterpriseIcon}" height="80" width="80" >
-                                    </h:graphicImage>-->
                                     <h:graphicImage value="#{enterprise.enterpriseIcon}" height="80" width="80" >
                                     </h:graphicImage>
-                                    <!--<h:graphicImage value="C:\Users\s519351\Documents\NetBeansProjects\FinalGDP\web\#{enterprise.icon}" height="80" width="80"></h:graphicImage>-->
                                 </h:outputLink>
                             </div></h:column>
                         <h:column><div class="enterpriseName">
@@ -90,7 +100,7 @@
         <br></br>
         <br></br>
 
-         <div class="col-lg-4 visible-lg">
+        <div class="col-lg-4 visible-lg">
             <div class="panel panel-default" style="margin-left: 23%; width:75%;">
                 <div class="panel-body" style="min-height: 225px; max-height: 225px; ">
                     <div id="col-left">

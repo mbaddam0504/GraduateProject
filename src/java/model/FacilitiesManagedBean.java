@@ -6,6 +6,8 @@
 package model;
 
 
+//import java.awt.event.ActionEvent;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
@@ -14,6 +16,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -21,36 +28,65 @@ import javax.faces.bean.ManagedBean;
  * @author s519351
  */
 @ManagedBean
-public class FacilitiesManagedBean {
+@SessionScoped
+public class FacilitiesManagedBean implements Serializable {
 
+    private static final long serialVersionUID=1L;
+    
     private String FacilityName;
     private String EnterpriseName;
-//    public String myName="";
-//    public String myLat="";
-//    public String myLng="";
-//
-//    public String getMyName() {
-//        return myName;
-//    }
-//
-//    public String getMyLat() {
-//        return myLat;
-//    }
-//
-//    public String getMyLng() {
-//        return myLng;
-//    }
-//    
-    
-       
+    private String someVariable;
+    private String FirstImagePath;
+    private String FirstVideoPath;
+    private String FirstImageName;
+    private String FirstVideoName;
+
     public String getFacilityName() {
         return FacilityName;
     }
 
     public void setFacilityName(String FacilityName) {
         this.FacilityName = FacilityName;
+        System.out.println("Setter FName: "+FacilityName);
     }
 
+    public String getFirstImagePath() {
+        return FirstImagePath;
+    }
+
+    public void setFirstImagePath(String FirstImagePath) {
+        this.FirstImagePath = FirstImagePath;
+    }
+
+    public String getFirstVideoPath() {
+        return FirstVideoPath;
+    }
+
+    public void setFirstVideoPath(String FirstVideoPath) {
+        this.FirstVideoPath = FirstVideoPath;
+    }
+
+    public String getFirstImageName() {
+        return FirstImageName;
+    }
+
+    public void setFirstImageName(String FirstImageName) {
+        this.FirstImageName = FirstImageName;
+    }
+
+    public String getFirstVideoName() {
+        return FirstVideoName;
+    }
+
+    public void setFirstVideoName(String FirstVideoName) {
+        this.FirstVideoName = FirstVideoName;
+    }
+
+
+    
+    public void submit(){
+    }
+       
     public String getEnterpriseName() {
         return EnterpriseName;
     }
@@ -59,10 +95,20 @@ public class FacilitiesManagedBean {
         this.EnterpriseName = EnterpriseName;
     }
 
+
+    
+    
     /**
      * Creates a new instance of FacilitiesManagedBean
      */
     public FacilitiesManagedBean() {
+    }
+    
+    public void passFName(){
+     String fname= FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("FName");
+//     fname="R T";
+        System.out.println("Facility name from javascript: "+fname);
+//        setFacilityName(fname);
     }
 
     /*
@@ -103,7 +149,7 @@ public class FacilitiesManagedBean {
         return dir;
     }
 
-    public ArrayList<Facility> getFacilityDetails() {
+    public ArrayList<Facility> getFacilityList() {
         ArrayList<Facility> Flist = new ArrayList<>();
         Statement stmt = null;
         Connection con = null;
@@ -113,7 +159,7 @@ public class FacilitiesManagedBean {
             Class.forName("com.mysql.jdbc.Driver");
 
             con = DriverManager.getConnection(DBActions.URL, DBActions.USER, DBActions.PASSWORD);
-            String sql = "select * from facility";
+            String sql = "select facility_name from facility";
 
             stmt = con.createStatement();
 
@@ -122,7 +168,7 @@ public class FacilitiesManagedBean {
             while (rs.next()) {
                 System.out.println("Facility Name:" + rs.getString("facility_name"));
 //                Flist.add(new Facility("Giri","Giri",1,1,"giri"));
-                Flist.add(new Facility(rs.getString("facility_name"), rs.getString("facility_desc"), rs.getFloat("latitude"), rs.getFloat("longitude"), rs.getString("directions")));
+                Flist.add(new Facility(rs.getString("facility_name")));
             }
 
         } catch (ClassNotFoundException | SQLException e) {
@@ -139,6 +185,47 @@ public class FacilitiesManagedBean {
 
         return Flist;
     }
+    
+    
+    public String getFacDesc() {
+        String desc="";
+        Statement stmt = null;
+        Connection con = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            con = DriverManager.getConnection(DBActions.URL, DBActions.USER, DBActions.PASSWORD);
+            System.out.println("************ "+getFacilityName());
+            String sql = "select facility_desc from facility where facility_name='"+getFacilityName()+"'";
+            System.out.println("sql stmt: "+sql);
+            stmt = con.createStatement();
+
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                System.out.println("Facility Desc:" + rs.getString("facility_desc"));
+//                Flist.add(new Facility("Giri","Giri",1,1,"giri"));
+                desc=rs.getString("facility_desc");
+            }
+
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return desc;
+    }
+    
+    
     
     /**
      *
@@ -161,10 +248,12 @@ public class FacilitiesManagedBean {
             rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 System.out.println("Latitude:" + rs.getFloat("latitude"));
-                myLat+=rs.getFloat("latitude")+",";
-                
+//                if (newrs.next()) {
+                    myLat += rs.getFloat("latitude")+ ",";
+//                } else {
+//                    myLat += rs.getFloat("latitude") ;
+//                }
             }
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
@@ -268,7 +357,7 @@ System.out.println("Facility Name xxxxxxxxxxxxxxxxx: "+myName);
 
             con = DriverManager.getConnection(DBActions.URL, DBActions.USER, DBActions.PASSWORD);
             //'"+getFacilityName()+"'
-            String sql = "select * from enterprise where facility_id in (select facility_id from facility where facility_name='R T')";
+            String sql = "select * from enterprise where facility_id in (select facility_id from facility where facility_name='"+getFacilityName()+"')";
             
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
@@ -333,6 +422,7 @@ System.out.println("Facility Name xxxxxxxxxxxxxxxxx: "+myName);
         Statement stmt = null;
         Connection con = null;
         ResultSet rs = null;
+        int i=0;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -344,9 +434,17 @@ System.out.println("Facility Name xxxxxxxxxxxxxxxxx: "+myName);
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
+                if(i==0){
+                    FirstImagePath=rs.getString("imagepath");
+                    FirstImageName=rs.getString("imagename");
+                    i++;
+                    System.out.println("i value: "+i);
+                }
+                else{
                 System.out.println("Iname: " + rs.getString("imagename") + "\n Idesc:" + rs.getString("image_desc") + "\n Eicon:" + rs.getString("imagepath"));
 //                String imagePath="C:\\Users\\s519351\\Documents\\NetBeansProjects\\FinalGDP\\web\\"+rs.getString("imagepath");
                 Ilist.add(new Image(rs.getString("image_desc"), rs.getString("imagepath"), rs.getString("imagename")));
+                }
             }
 
         } catch (Exception e) {
@@ -368,6 +466,7 @@ System.out.println("Facility Name xxxxxxxxxxxxxxxxx: "+myName);
         Statement stmt = null;
         Connection con = null;
         ResultSet rs = null;
+        int i=0;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -379,8 +478,15 @@ System.out.println("Facility Name xxxxxxxxxxxxxxxxx: "+myName);
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
+                if(i==0){
+                    FirstVideoPath=rs.getString("videopath");
+                    FirstVideoName= rs.getString("videoname");
+                    i++;
+                    System.out.println("i value video: "+i);
+                }else{
                 System.out.println("Vname: " + rs.getString("videoname") + "\n Vdesc:" + rs.getString("video_desc") + "\n Vpath:" + rs.getString("videopath"));
                 Vlist.add(new Video(rs.getString("video_desc"), rs.getString("videopath"), rs.getString("videoname")));
+                }
             }
 
         } catch (Exception e) {
