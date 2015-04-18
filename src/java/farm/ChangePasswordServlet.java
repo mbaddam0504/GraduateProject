@@ -50,14 +50,14 @@ String pwdLogged = rs.getString("password");
      System.out.println("password logged "+pwdLogged);
  if(! pwdLogged.equals(currentPassword))
  {
- request.setAttribute("incorrect", " current password is incorrect");
+ request.setAttribute("incorrect", " Current Password Is Incorrect");
     request.getRequestDispatcher("/ChangePassword.jsp").forward(request, response);
 
  break;
  }
  if(pwdLogged.equals(currentPassword) && !passwordEntered.equals(passwordReEntered) )
  {
-   request.setAttribute("incorrect", " new combination mismatch");
+   request.setAttribute("incorrect", " New Password Combination Mismatch");
       request.getRequestDispatcher("/ChangePassword.jsp").forward(request, response);
 
     }
@@ -65,7 +65,7 @@ String pwdLogged = rs.getString("password");
  if(pwdLogged.equals(currentPassword) && passwordEntered.equals(passwordReEntered) )
  {
      changePwdBean.insertIntoLogin(passwordEntered, userLogged);
- request.setAttribute("incorrect", " login successful");
+ request.setAttribute("incorrect", " Login Successful");
  request.getRequestDispatcher("/Facilities.jsp").forward(request, response);
 break;
  }

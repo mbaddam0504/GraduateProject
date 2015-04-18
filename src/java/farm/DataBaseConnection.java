@@ -21,9 +21,9 @@ public static Connection giveConnection() throws ClassNotFoundException, SQLExce
 {
  String driverName = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/";
-        String dbName = "northfarm";
+        String dbName = "farmapp";
         String userName = "root";
-        String password = "";
+        String password = "Gradstu@2015";
    Connection con=null;
   Class.forName(driverName);
 con = DriverManager.getConnection(url + dbName, userName, password);

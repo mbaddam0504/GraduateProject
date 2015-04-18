@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -90,6 +91,7 @@ public class AddEnterpriseServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          DBActions dbActions = new DBActions();
             HttpSession session = request.getSession();
+            ServletContext context = session.getServletContext();
             Facility facility = (Facility) session.getAttribute("selectedFacilityDetails");
             System.out.println("facility Id----" + facility.getFacilityID());
             //String saveOrCancel = request.getParameter("saveOrCancelEnterprise");
@@ -109,7 +111,8 @@ String enterpriseName = request.getParameter("enterpriseName").trim();
                     String[] strArr = str2.split(">");
                     String fileName = strArr[strArr.length-1];
                     System.out.println("fileName----" + fileName);
-                    part.write(getServletContext().getRealPath("../../web/"+ facility.getFacilityID() + "/" + fileName));
+                    String realContextPath = context.getRealPath(request.getContextPath())+"\\..\\..\\..\\web\\"+facility.getFacilityID()+"\\"+fileName;
+                    part.write(realContextPath);
                     String filePath = facility.getFacilityID() + "/" + fileName;
                     Enterprise newEnterprise = new Enterprise();
                     newEnterprise.setEnterpriseName(enterpriseName);
@@ -128,10 +131,19 @@ String enterpriseName = request.getParameter("enterpriseName").trim();
                     if (z == 0) {
                         dbActions.addNewEnterprise(newEnterprise);
 //create directory to store mediafiles of enterprise
-                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + facility.getFacilityID() + "/" + dbActions.getEnterpriseId(facility.getFacilityID(), enterpriseName)));
+                             //creating directory for created facility
+        
+String realContextPath1 = context.getRealPath(request.getContextPath())+"\\..\\..\\..\\web\\"+facility.getFacilityID()+"\\"+dbActions.getEnterpriseId(facility.getFacilityID(), enterpriseName);
+                      System.out.println("facility directory path...........:"+ realContextPath);
+        File fileSaveDir = new File(realContextPath1);
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdir();
-                }
+                    System.out.println("directory created");
+                }     
+//                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + facility.getFacilityID() + "/" + dbActions.getEnterpriseId(facility.getFacilityID(), enterpriseName)));
+//                if (!fileSaveDir.exists()) {
+//                    fileSaveDir.mkdir();
+//                }
                         session.setAttribute("selectedFacilityDetails", dbActions.getFacilityDetails(facility.getFacilityID()));
                         session.setAttribute("enterpriseChecker", dbActions.getFacilityDetails(facility.getFacilityID()).getEnterprisesList().isEmpty() ? "disabled" : "");
                         response.sendRedirect("ExtraEnterpriseServlet?isEnterpriseDuplicated=no");

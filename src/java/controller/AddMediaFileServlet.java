@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -91,6 +92,7 @@ public class AddMediaFileServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
+        ServletContext context = session.getServletContext();
         String fileType = request.getParameter("fileType");
         String fileName = request.getParameter("fileName").trim();
         String fileDescription = request.getParameter("fileDescription");
@@ -115,7 +117,9 @@ public class AddMediaFileServlet extends HttpServlet {
                     String[] strArr = str2.split(">");
                     String mediaFileName = strArr[strArr.length-1];
                 System.out.println("mediafileName1----" + mediaFileName);
-                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName));
+                String realContextPath1 = context.getRealPath(request.getContextPath())+"\\..\\..\\..\\web\\"+selectedFacility.getFacilityID()+"\\"+  selectedEnterprise.getEnterpriseID() + "\\" + mediaFileName;
+                //part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName));
+                part.write(realContextPath1);
                 String filePath = selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName;
                 Image image = new Image();
                 image.setEnterpriseID(selectedEnterprise.getEnterpriseID());
@@ -134,10 +138,10 @@ response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=no");
                     response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=yes");
                 }
             } else {
-                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID()));
-                if (!fileSaveDir.exists()) {
-                    fileSaveDir.mkdir();
-                }
+//                File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID()));
+//                if (!fileSaveDir.exists()) {
+//                    fileSaveDir.mkdir();
+//                }
 //                     String testFileName = extractFileName(part);
 //                     testFileName.replace(' ', '*');
                  String str = extractFileName(part).replace(' ', 'x');
@@ -147,7 +151,10 @@ response.sendRedirect("ExtraMediaFileServlet?isMediafileDuplicated=no");
                 System.out.println("mediafileName----" + mediaFileName);
 //                String mediaFileType = mediaFileName.substring(mediaFileName.lastIndexOf(".")+1);
 //                System.out.println("mediaFileType" + mediaFileType);
-                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName));
+//                part.write(getServletContext().getRealPath("../../web/" + selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName));
+               String realContextPath1 = context.getRealPath(request.getContextPath())+"\\..\\..\\..\\web\\"+selectedFacility.getFacilityID()+"\\"+  selectedEnterprise.getEnterpriseID() + "\\" + mediaFileName;
+               
+                part.write(realContextPath1);
                 String filePath = selectedFacility.getFacilityID() + "/" + selectedEnterprise.getEnterpriseID() + "/" + mediaFileName;
                 Video video = new Video();
                 video.setEnterpriseID(selectedEnterprise.getEnterpriseID());

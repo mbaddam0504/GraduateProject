@@ -19,7 +19,7 @@
         <br><br><br>
        
         <div id="adduserdiv">
-            <form action="AddUSerServlet">
+            <form action="AddUSerServlet" method="POST">
                 <table> 
                     <th align="center">Add User</th>
                     <tr>
@@ -60,15 +60,16 @@
                     </tr>
                     
                     <tr>
-                          <div id="error">     
- <% if(request.getAttribute("pwdcomb") != null)
-{
-out.println(request.getAttribute("pwdcomb"));
-}
-else{
-out.println("");
-}
-%>  
+<div id="error">
+<c:choose>
+    <c:when test="${pwdcomb != null}">
+<c:out value="${pwdcomb}"/>
+    </c:when>
+<c:otherwise>
+    <c:out value=""/>
+</c:otherwise>
+</c:choose>        
+        </div> 
                           </div>
                     </tr>
                     

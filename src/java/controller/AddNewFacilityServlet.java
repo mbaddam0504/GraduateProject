@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,9 +59,14 @@ public class AddNewFacilityServlet extends HttpServlet {
         
         dbActions.addNewFacility(facility);
         //creating directory for created facility
+        ServletContext context = session.getServletContext();
+String realContextPath = context.getRealPath(request.getContextPath())+"\\..\\..\\..\\web\\"+dbActions.getFacilityId(facilityName);
+            //System.out.println("facility directory path...........:"+ realContextPath);
+
         File fileSaveDir = new File(getServletContext().getRealPath("../../web/" + dbActions.getFacilityId(facilityName)));
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdir();
+                    System.out.println("directory created");
                 }
         ArrayList<String> facilitiesList = dbActions.getFacilitiesList(); 
         session.setAttribute("facilitiesList", facilitiesList);

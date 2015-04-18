@@ -7,7 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="farm.DeleteUserBean" %>
 <%@ page import="java.util.ArrayList"%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,28 +24,33 @@
     <body>
         
         <h1 align="center" style="color: white; font-family: calibri; font-size: 40px;">List Of Users</h1>
-        <div id="deleteusersdivison"></div>
+        <div id="deleteusersdiv"></div>
         <div class="users">
-            <form  action="DeleteUserServlet" method=""POST>
+            <form  action="DeleteUserServlet" method="POST">
                 <table align="center">
-               <% 
-      ArrayList<String>  al =(ArrayList<String>)request.getAttribute("list");
-      for(String userid:al){
-                     %>
+     <c:choose>
+    <c:when test="${fn:length(list) gt 0}">
+ <c:forEach var="userid" items="${list}">
+     <tr> <td> <input type="checkbox" value="${userid}" id="users" name="users"><c:out value="${userid}"/></tr>
+ </c:forEach>
+    </c:when>
+<c:otherwise>
+         <p id="nousers"> <c:out value="Oops!! No Users To Delete"/></p>
+</c:otherwise>
+</c:choose> 
 
-                     <tr> <td> <input type="checkbox" value="<%=userid%>" id="users" name="users"><%=userid%></tr>
-  <%}%>
-  </table>
+                     </table>
      </div>     
-<div id="error">     
- <% if(request.getAttribute("error") != null)
-{
-out.println(request.getAttribute("error"));
-}
-else{
-out.println(" ");
-}
-%>
+<div id="error">
+<c:choose>
+    <c:when test="${error != null}">
+<c:out value="${error}"/>
+    </c:when>
+<c:otherwise>
+    <c:out value=""/>
+</c:otherwise>
+</c:choose>        
+        </div> 
   <table align="center">
       <tr> <td>  
               <input type="submit" Value="Delete" id="deleteuserbutton" onclick="danger()"/>

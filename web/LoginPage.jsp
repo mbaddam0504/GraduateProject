@@ -4,6 +4,7 @@
     Author     : S519459
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html>
     <head>
@@ -19,7 +20,7 @@
         <h1 align="center">Northwest Missouri State University<br> Agricultural Farm</h1>
         <br><br><br><br><br><br><br><br>
         <div id="rdiv">
-            <form action="LoginServlet" >
+            <form action="LoginServlet" method="POST" >
                 <table> 
                     <th align="center">Sign In</th>
                     <tr><td></td></tr><tr><td></td></tr>
@@ -37,18 +38,17 @@
                     </tr>
                 </table>
             <br><br><br><br><br><br><br><br><br><br><br>
-            <div id="error">     
- <% if(request.getAttribute("message12") != null)
-{
-out.println(request.getAttribute("message12"));
-}
-else{
-out.println("");
-}
-%>
-<br>
-</div> 
-             
+         <div id="error">
+<c:choose>
+    <c:when test="${message12 != null}">
+<c:out value="${message12}"/>
+    </c:when>
+<c:otherwise>
+    <c:out value=""/>
+</c:otherwise>
+</c:choose>
+    <br>            
+        </div>            
               
               <input type="submit" value ="Log In" id="addButton">
             </form>

@@ -67,7 +67,7 @@ break;
 }
   
   if(value==false){
-    request.setAttribute("message", "incorrect userid");  
+    request.setAttribute("message", "Incorrect UserId");  
    request.getRequestDispatcher("/ForgotPassword.jsp").forward(request, response);
       System.out.println(" incorrect user id");
 
@@ -88,7 +88,7 @@ request.setAttribute("message", "The password has been sent to your mail");
  else
  {
 
-   String  message ="Registered mail doesnt match";
+   String  message ="Registered Mail didn't match";
      System.out.println(" messgae is "+message);
     request.setAttribute("message", message);
  // response.sendRedirect("ForgotPassword.jsp");

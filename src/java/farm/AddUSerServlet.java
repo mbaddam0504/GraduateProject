@@ -74,12 +74,12 @@ public class AddUSerServlet extends HttpServlet {
              }
              else
              {    
-             request.setAttribute("pwdcomb", "Password for new user mismatch");
+             request.setAttribute("pwdcomb", "Password for New User Mismatch");
              request.getRequestDispatcher("/AddUser.jsp").forward(request, response);
              } 
          }
          else{
-             request.setAttribute("pwdcomb", "Password for admin mismatch");
+             request.setAttribute("pwdcomb", "Incorrect Admin Password");
              request.getRequestDispatcher("/AddUser.jsp").forward(request, response);        
          
          }

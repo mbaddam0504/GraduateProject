@@ -7,12 +7,21 @@ and open the template in the editor.
     Created on : Nov 21, 2014, 1:33:29 AM
     Author     : S519412
 */
+a:visited
+{
+    color: blue;
+}
+#nousers
+{
+    text-align: center;
+    color: red;
+}
 .users
 {
     background-color: white;
     alignment-adjust: middle;
     width: 30%;
-    height: 200px;
+    /*height: 200px;*/
     margin-left: 37%;
     color: black;
     font-family: calibri;

@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="farm.LoginBean" %>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,43 +19,39 @@
         <br><br><br>
         <!--<h1 align="center">Northwest  Agricultural Farm</h1>-->
         <div id="profilediv">
-            <form action="ChangeProfileServlet">
-                <% LoginBean desired =new LoginBean();
-                String userid = (String)session.getAttribute("userid");
-   LoginBean result = desired.CurrentUser(userid);
-                %>
-            
+            <form action="ChangeProfileServlet" method="POST">
+        
                 <table> 
                     <th align="center">Your Profile</th>
                     <tr>
                         <td><label >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFirst Name </label></td>
                     </tr>
                     <tr  align="center">
-                        <td><input type="text" name="firstname" value="<%=result.getFirstName() %>"></td>
+                        <td><input type="text" name="firstname" value="${profile.getFirstName()}"></td>
                     </tr>
                     <tr>
                         <td><label >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Last Name </label></td>
                     </tr>
                     <tr  align="center">
-                        <td><input type="text" name="lastname" value="<%=result.getLastName() %>"></td>
+                        <td><input type="text" name="lastname" value="${profile.getLastName()}"></td>
                     </tr>
                     <tr>
                         <td><label >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Email Id </label></td>
                     </tr>
                     <tr  align="center">
-                        <td><input type="text" name="emailid" value="<%=result.getEmailid() %>"></td>
+                        <td><input type="text" name="emailid" value="${profile.getEmailid()}"></td>
                     </tr>
                    
                     <tr>
-                          <div id="error">     
- <% if(request.getAttribute("error") != null)
-{
-out.println(request.getAttribute("error"));
-}
-else{
-out.println("");
-}
-%>  
+     <div id="error">
+<c:choose>
+    <c:when test="${error != null}">
+<c:out value="${error}"/>
+    </c:when>
+<c:otherwise>
+    <c:out value=""/>
+</c:otherwise>
+</c:choose>    
                     </tr>
                     <tr>
                         <td><br></td>

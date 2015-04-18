@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
     <head>
         <title>Welcome</title>
@@ -12,7 +13,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
        
         <link type="text/css" rel ="stylesheet" href="project.css">
-        <link type="text/css" rel="stylesheet" href="register.css">
+        <link type="text/css" rel="stylesheet" href="forgotPassword.css">
         
     </head>
     <body>
@@ -37,17 +38,17 @@
                     </tr>
                 </table>
             <br><br><br><br><br><br><br><br><br><br><br>
-            <div id="error">     
- <% if(request.getAttribute("message") != null)
-{
-out.println(request.getAttribute("message"));
-}
-else{
-out.println("");
-}
-%>
+<div id="error">
+<c:choose>
+    <c:when test="${message != null}">
+<c:out value="${message}"/>
+    </c:when>
+<c:otherwise>
+    <c:out value=""/>
+</c:otherwise>
+</c:choose>        
+        </div> 
 <br>
-</div> 
 <table id="tbottom">
     <tr>   <input type="submit" value ="Send" id="addButton">
             </form>
@@ -59,6 +60,6 @@ out.println("");
      </tr>
 </table>
 <br><br>
- 
+ </div>
     </body>
 </html>

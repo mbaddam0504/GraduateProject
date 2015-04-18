@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +21,7 @@
     <h1 align="center">Change Existing Password</h1>
     <div id="changeexistingpwddiv">
         
-            <form action="ChangePasswordServlet">
+            <form action="ChangePasswordServlet" method="POST">
                 <table> 
                     <th align="center">Change Password</th>
                     <tr>
@@ -44,16 +45,16 @@
                     
                 </table>
         <br>
-        <div id="incorrect">
-          <% if(request.getAttribute("incorrect") != null)
-{
-out.println(request.getAttribute("incorrect"));
-}
-else{
-out.println("");
-}
-%>   
-        </div>
+     <div id="error">
+<c:choose>
+    <c:when test="${incorrect != null}">
+<c:out value="${incorrect}"/>
+    </c:when>
+<c:otherwise>
+    <c:out value=""/>
+</c:otherwise>
+</c:choose>        
+        </div> 
                 <input type="submit" value ="Submit" id="changecurrentpasswordButton">
             </form>
         <form action="Facilities.jsp" method="POST">
